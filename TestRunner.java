@@ -39,8 +39,8 @@ class Testrunner extends Base
 
       //enter you code according to testCase
 
-        help.hoverOverElement(By.xpath("xpath");
-
+        help.hoverOverElement(By.xpath("xpath");//to hover on a element
+        help.javascriptScroll(By.xpath("xpath"));//to scroll on a element
 
         
     }
