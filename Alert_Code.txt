@@ -1,0 +1,5 @@
+Alert a=driver.switchTo().alert();
+    a.accept();
+    a.dismiss();
+    a.sendKeys("msg");
+use according to testcase given...
