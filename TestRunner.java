@@ -15,7 +15,9 @@ import utils.*;
 
 
 class Testrunner extends Base
-{ Reporter report = new Reporter();
+{ 
+    WebDriverHelper help=new WebDriverHelper(driver);
+    Reporter report = new Reporter();
     ExtentReports reports = report.generateExtentReport("report");
     ExtentTest test = null;
     @BeforeMethod
@@ -26,7 +28,21 @@ class Testrunner extends Base
     @Test
     void test()
     {
+        test=reports.createTest("sampletest");
+         for(int i=0;i<300;i++)
+    {
+      LoggerHandler.info("click on signin");
+      test.pass("click");
+    }
+        Screenshot.captureScreenShot("gapfactory_screenshot");
+        test.addScreenCaptureFromPath("/home/coder/project/workspace/Project/screenshots/gapfactory_screenshot2025.12.03.16.05.52.png");//path will be different
+
       //enter you code according to testCase
+
+        help.hoverOverElement(By.xpath("xpath");
+
+
+        
     }
     @AfterMethod
     void teardown()
