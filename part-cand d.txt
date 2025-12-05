@@ -1,0 +1,139 @@
+executiontype=remote
+browsername=chrome
+url=https://demo.applitools.com/index.html
+
+
+
+package runner;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import utils.Base;
+import utils.EventHandler;
+import utils.Screenshot;
+
+public class TestRunner extends Base {
+	
+
+	@BeforeMethod
+	public void beforeMethod() throws MalformedURLException {
+		openBrowser();
+
+	}
+
+	@Test
+	public void test() throws IOException{
+		// Write your scripts hear
+		driver.findElement(By.id("username")).sendKeys("demouser");
+		driver.findElement(By.id("password")).sendKeys("demo123");
+		driver.findElement(By.xpath("//input[@class=\"form-check-input\"]")).click();
+		driver.findElement(By.id("log-in")).click();
+
+
+		Screenshot.getScreenShot(driver,"sample");
+	}
+
+	
+	@AfterMethod
+	public void tearDown() {
+		driver.quit();
+	}
+
+}
+
+
+---------------------------------------------------------------------------
+
+executiontype=remote
+browsername=chrome
+url=https://www.zendesk.com/in/contact/
+
+
+
+
+
+package runner;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
+import utils.Base;
+import utils.EventHandler;
+import utils.LoggerHandler;
+import utils.Reporter;
+import utils.Screenshot;
+
+public class TestRunner extends Base {
+	Reporter re=new Reporter();
+		ExtentReports reports=re.generateExtentReport("sam");
+		ExtentTest test=null;
+
+	@BeforeMethod
+	public void beforeMethod() throws MalformedURLException {
+		openBrowser();
+
+	}
+
+	@Test
+	public void test() throws IOException{
+		
+		// Write your scripts hear
+		driver.findElement(By.name("FirstName")).sendKeys("FirstName");
+		driver.findElement(By.name("LastName")).sendKeys("LastName");
+		driver.findElement(By.name("owner.email")).sendKeys("Work001@email.com");
+		
+		WebElement w=driver.findElement(By.name("selectedCountry"));
+		Select s=new Select(w);
+		s.selectByValue("India");
+
+
+		LoggerHandler.logInfo("completed");
+
+		Screenshot.getScreenShot(driver,"sample");
+	}
+
+	
+	@AfterMethod
+	public void tearDown() {
+		driver.quit();
+		reports.flush();
+	}
+
+}
+
+
